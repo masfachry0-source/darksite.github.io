@@ -1,0 +1,2829 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Dark // Site</title>
+
+<style>
+
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+:root{
+    --green:#ff0033;
+    --green-dark:#a80022;
+    --black:#040202;
+    --panel:#100606;
+    --line:rgba(255,0,51,.25);
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    background:var(--black);
+    color:var(--green);
+    font-family:
+        "Courier New",
+        Consolas,
+        monospace;
+    overflow-x:hidden;
+}
+
+/* =====================
+   MATRIX BACKGROUND
+===================== */
+
+#matrix{
+    position:fixed;
+    inset:0;
+    width:100%;
+    height:100%;
+    z-index:-5;
+    opacity:.13;
+}
+
+/* =====================
+   SCANLINES
+===================== */
+
+.scanlines{
+    position:fixed;
+    inset:0;
+    z-index:20;
+    pointer-events:none;
+
+    background:
+    repeating-linear-gradient(
+        0deg,
+        transparent 0px,
+        transparent 3px,
+        rgba(255,0,51,.025) 4px
+    );
+}
+
+/* =====================
+   NAVBAR
+===================== */
+
+nav{
+    position:sticky;
+    top:0;
+    z-index:10;
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    padding:16px 6%;
+
+    background:rgba(4,2,2,.9);
+
+    border-bottom:
+        1px solid var(--line);
+
+    backdrop-filter:blur(10px);
+}
+
+.logo{
+    font-size:20px;
+    font-weight:bold;
+
+    text-shadow:
+        0 0 8px var(--green),
+        0 0 20px var(--green);
+}
+
+nav span{
+    font-size:11px;
+    opacity:.7;
+}
+
+/* =====================
+   HERO
+===================== */
+
+.hero{
+    min-height:90vh;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    text-align:center;
+
+    padding:40px 20px;
+}
+
+.hero-content{
+    max-width:850px;
+}
+
+.badge{
+    display:inline-block;
+
+    border:1px solid var(--line);
+
+    padding:7px 14px;
+
+    font-size:11px;
+
+    margin-bottom:20px;
+
+    box-shadow:
+        0 0 15px rgba(255,0,51,.08);
+}
+
+.hero h1{
+    font-size:
+        clamp(45px,10vw,100px);
+
+    line-height:.9;
+
+    letter-spacing:8px;
+
+    text-shadow:
+        0 0 10px var(--green),
+        0 0 30px var(--green),
+        0 0 70px var(--green);
+}
+
+.hero h2{
+    margin-top:18px;
+
+    font-size:
+        clamp(14px,3vw,24px);
+
+    opacity:.7;
+}
+
+.hero p{
+    margin:25px auto;
+
+    max-width:650px;
+
+    line-height:1.8;
+
+    opacity:.55;
+}
+
+/* =====================
+   BUTTON
+===================== */
+
+.cyber-button{
+    display:inline-block;
+
+    padding:13px 22px;
+
+    margin:6px;
+
+    color:var(--green);
+
+    text-decoration:none;
+
+    border:1px solid var(--green);
+
+    background:
+        rgba(255,0,51,.03);
+
+    font-family:inherit;
+
+    transition:.2s;
+
+    cursor:pointer;
+}
+
+.cyber-button:hover{
+    background:
+        var(--green);
+
+    color:#000;
+
+    box-shadow:
+        0 0 15px var(--green),
+        0 0 40px rgba(255,0,51,.5);
+}
+
+/* =====================
+   SECTIONS
+===================== */
+
+section.content{
+    width:min(1100px,90%);
+
+    margin:auto;
+
+    padding:70px 0;
+}
+
+.section-title{
+    font-size:14px;
+
+    margin-bottom:25px;
+
+    border-left:
+        3px solid var(--green);
+
+    padding-left:12px;
+
+    text-shadow:
+        0 0 8px var(--green);
+}
+
+/* =====================
+   GRID
+===================== */
+
+.grid{
+    display:grid;
+
+    grid-template-columns:
+        repeat(3,1fr);
+
+    gap:14px;
+}
+
+.card{
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255,0,51,.06),
+            rgba(0,0,0,.8)
+        );
+
+    border:
+        1px solid var(--line);
+
+    padding:22px;
+
+    min-height:160px;
+
+    position:relative;
+
+    overflow:hidden;
+
+    transition:.25s;
+}
+
+.card::before{
+    content:"";
+
+    position:absolute;
+
+    top:0;
+    left:-100%;
+
+    width:100%;
+    height:1px;
+
+    background:var(--green);
+
+    box-shadow:
+        0 0 10px var(--green);
+
+    transition:.4s;
+}
+
+.card:hover::before{
+    left:100%;
+}
+
+.card:hover{
+    transform:
+        translateY(-4px);
+
+    border-color:
+        var(--green);
+
+    box-shadow:
+        0 0 25px
+        rgba(255,0,51,.1);
+}
+
+.card-number{
+    font-size:28px;
+
+    font-weight:bold;
+
+    margin-bottom:10px;
+
+    text-shadow:
+        0 0 10px var(--green);
+}
+
+.card-title{
+    font-size:12px;
+
+    margin-bottom:12px;
+}
+
+.card p{
+    font-size:11px;
+
+    line-height:1.7;
+
+    opacity:.5;
+}
+
+/* =====================
+   SYSTEM PANEL
+===================== */
+
+.system{
+    border:
+        1px solid var(--line);
+
+    padding:22px;
+
+    background:
+        rgba(15,0,3,.8);
+}
+
+.system-row{
+    margin:16px 0;
+}
+
+.system-label{
+    display:flex;
+
+    justify-content:space-between;
+
+    font-size:11px;
+
+    margin-bottom:6px;
+}
+
+.progress{
+    height:5px;
+
+    background:#200910;
+}
+
+.progress div{
+    height:100%;
+
+    background:var(--green);
+
+    box-shadow:
+        0 0 10px var(--green);
+
+    animation:
+        load 2s ease;
+}
+
+@keyframes load{
+    from{
+        width:0;
+    }
+}
+
+/* =====================
+   TERMINAL BOX
+===================== */
+
+.terminal{
+    background:#020101;
+
+    border:
+        1px solid var(--line);
+
+    padding:20px;
+
+    min-height:240px;
+
+    box-shadow:
+        inset 0 0 40px
+        rgba(255,0,51,.03);
+}
+
+.terminal-line{
+    font-size:12px;
+
+    line-height:2;
+
+    opacity:.75;
+}
+
+.prompt{
+    color:var(--green);
+}
+
+.cursor{
+    display:inline-block;
+
+    width:7px;
+    height:14px;
+
+    background:var(--green);
+
+    vertical-align:middle;
+
+    animation:
+        blink 1s infinite;
+}
+
+@keyframes blink{
+    50%{
+        opacity:0;
+    }
+}
+
+/* =====================
+   WARNING
+===================== */
+
+.warning{
+    border:
+        1px solid
+        rgba(255,0,51,.25);
+
+    padding:20px;
+
+    text-align:center;
+
+    margin-top:20px;
+
+    font-size:11px;
+
+    opacity:.65;
+}
+
+/* =====================
+   DIGITAL INFO
+===================== */
+
+.info-panel{
+    display:none;
+
+    margin-top:20px;
+
+    padding:25px;
+
+    border:
+        1px solid var(--line);
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255,0,51,.06),
+            rgba(0,0,0,.85)
+        );
+
+    box-shadow:
+        0 0 25px
+        rgba(255,0,51,.08);
+
+    animation:
+        infoOpen .3s ease;
+}
+
+.info-panel.active{
+    display:block;
+}
+
+.info-title{
+    font-size:18px;
+
+    margin-bottom:18px;
+
+    text-shadow:
+        0 0 10px var(--green);
+}
+
+.info-panel p{
+    font-size:12px;
+
+    line-height:1.8;
+
+    margin-bottom:15px;
+
+    opacity:.7;
+}
+
+@keyframes infoOpen{
+
+    from{
+        opacity:0;
+        transform:
+            translateY(-10px);
+    }
+
+    to{
+        opacity:1;
+        transform:
+            translateY(0);
+    }
+
+}
+
+/* =====================
+   FOOTER
+===================== */
+
+footer{
+    border-top:
+        1px solid var(--line);
+
+    padding:30px;
+
+    text-align:center;
+
+    font-size:10px;
+
+    opacity:.35;
+}
+
+/* =====================
+   RESPONSIVE
+===================== */
+
+@media(max-width:800px){
+
+    .grid{
+        grid-template-columns:
+            repeat(2,1fr);
+    }
+
+    nav{
+        padding:14px 4%;
+    }
+
+}
+
+@media(max-width:500px){
+
+    .grid{
+        grid-template-columns:1fr;
+    }
+
+    .hero h1{
+        letter-spacing:4px;
+    }
+
+    section.content{
+        width:92%;
+    }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<canvas id="matrix"></canvas>
+
+<div class="scanlines"></div>
+
+
+<!-- NAVBAR -->
+
+<nav>
+
+    <div class="logo">
+        DARK//SITE
+    </div>
+
+    <span>
+        SYSTEM ONLINE ●
+    </span>
+
+</nav>
+
+
+<!-- HERO -->
+
+<header class="hero">
+
+    <div class="hero-content">
+
+        <div class="badge">
+            [ Welcome To Dark Site :) ]
+        </div>
+
+        <h1>
+            Dark Site
+        </h1>
+
+        <h2>
+            Can You Handle Life?
+        </h2>
+
+        <p>
+            Selamat datang di lingkungan digital
+            terdalam. Eksplorasi sistem,
+            teknologi tergelap, jaringan, dan sisi gelap dunia digital
+            dalam satu interface futuristik.
+            hati-hati! berisi konten grafis!
+        </p>
+
+        <a
+            href="#system"
+            class="cyber-button"
+        >
+            GUIDE
+        </a>
+
+        <a
+            href="#terminal"
+            class="cyber-button"
+        >
+            TERMINAL
+        </a>
+
+    </div>
+
+</header>
+
+
+<!-- SYSTEM -->
+
+<section
+    class="content"
+    id="system"
+>
+
+    <div class="section-title">
+        // SYSTEM STATUS
+    </div>
+
+    <div class="grid">
+
+        <div class="card">
+
+            <div class="card-number">
+                01
+            </div>
+
+            <div class="card-title">
+                DEEP WEB
+            </div>
+
+            <p>
+                Deep Web adalah bagian internet yang tidak muncul di mesin pencari biasa. Contohnya email pribadi, database, akun, dan halaman yang membutuhkan login.
+            </p>
+
+        </div>
+
+
+        <div class="card">
+
+            <div class="card-number">
+                02
+            </div>
+
+            <div class="card-title">
+                DARK WEB
+            </div>
+
+            <p>
+              Dark Web adalah bagian kecil dari Deep Web yang menggunakan jaringan khusus sepert TOR. Tidak semua aktivitas di dalamnya ilegal, tetapi terdapat juga aktivitas yang berbahaya dan melanggar hukum.
+            </p>
+
+        </div>
+
+
+        <div class="card">
+
+            <div class="card-number">
+                03
+            </div>
+
+            <div class="card-title">
+                SHOCK SITE/GORE
+            </div>
+
+            <p>
+                Shock site adalah situs yang sengaja menampilkan konten mengejutkan atau mengganggu seperti pembunuhan bunuh diri mutilasi kartel dan aksi terorisme vuntuk memberikan reaksi kuat kepada pengunjung.
+            </p>
+
+        </div>
+
+
+        <div class="card">
+
+            <div class="card-number">
+                04
+            </div>
+
+            <div class="card-title">
+                SURFACE WEB
+            </div>
+
+            <p>
+                Surface Web adalah bagian internet yang dapat ditemukan dan diindeks oleh mesin pencari seperti Google dan Bing.
+            </p>
+
+        </div>
+
+
+        <div class="card">
+
+            <div class="card-number">
+                05
+            </div>
+
+            <div class="card-title">
+                CYBER SECURITY
+            </div>
+
+            <p>
+                Cyber Security adalah upaya melindungi perangkat, jaringan, aplikasi, dan data dari akses atau serangan yang tidak diinginkan.
+            </p>
+
+        </div>
+
+
+        <div class="card">
+
+            <div class="card-number">
+                06
+            </div>
+
+            <div class="card-title">
+                MARIANA WEB
+            </div>
+
+            <p>
+                Mariana Web adalah mitos internet yang sering digambarkan sebagai lapisan terdalam dan paling rahasia di dunia maya, berada di bawah dark web.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- PERFORMANCE -->
+
+<section class="content">
+
+    <div class="section-title">
+        // SYSTEM PERFORMANCE
+    </div>
+
+    <div class="system">
+
+        <div class="system-row">
+
+            <div class="system-label">
+                <span>CPU</span>
+                <span>78%</span>
+            </div>
+
+            <div class="progress">
+                <div style="width:78%"></div>
+            </div>
+
+        </div>
+
+
+        <div class="system-row">
+
+            <div class="system-label">
+                <span>MEMORY</span>
+                <span>64%</span>
+            </div>
+
+            <div class="progress">
+                <div style="width:64%"></div>
+            </div>
+
+        </div>
+
+
+        <div class="system-row">
+
+            <div class="system-label">
+                <span>NETWORK</span>
+                <span>91%</span>
+            </div>
+
+            <div class="progress">
+                <div style="width:91%"></div>
+            </div>
+
+        </div>
+
+
+        <div class="system-row">
+
+            <div class="system-label">
+                <span>SECURITY</span>
+                <span>100%</span>
+            </div>
+
+            <div class="progress">
+                <div style="width:100%"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- TERMINAL -->
+
+<section
+    class="content"
+    id="terminal"
+>
+
+    <div class="section-title">
+        // DIGITAL TERMINAL
+    </div>
+
+    <div class="terminal">
+
+        <div class="terminal-line">
+            <span class="prompt">
+                root@cyber:~$
+            </span>
+            initializing system...
+        </div>
+
+        <div class="terminal-line">
+            [ OK ] Network interface
+        </div>
+
+        <div class="terminal-line">
+            [ OK ] Security module
+        </div>
+
+        <div class="terminal-line">
+            [ OK ] Database connection
+        </div>
+
+        <div class="terminal-line">
+            [ OK ] Cyber core
+        </div>
+
+        <div class="terminal-line">
+            [ OK ] Digital grid
+        </div>
+
+        <br>
+
+        <div class="terminal-line">
+            <span class="prompt">
+                root@cyber:~$
+            </span>
+            system ready
+            <span class="cursor"></span>
+        </div>
+
+    </div>
+
+    <div class="warning">
+        SYSTEM STATUS: ALL MODULES OPERATIONAL
+    </div>
+
+</section>
+
+
+<!-- DIGITAL INFO -->
+
+<section\ class="content">
+
+    <div class="section-title">
+        // DARK WEB INFO
+    </div>
+
+    <button
+        class="cyber-button"
+        onclick="toggleInfo()"
+    >
+        WHAT IS DARK WEB/DEEP WEB
+    </button>
+
+    <div
+        id="digitalInfo"
+        class="info-panel"
+    >
+
+        <div class="info-title">
+            INFORMATION DARK WEB
+        </div>
+
+        <p>
+            Dark web adalah bagian tersembunyi dari internet yang tidak bisa diakses lewat mesin pencari biasa seperti Google atau Bing, melainkan membutuhkan perangkat lunak atau peramban khusus seperti Tor.
+        </p>
+
+        <p>
+            Anonimitas Tinggi: Menggunakan teknik seperti onion routing yang mengenkripsi data dan melewatkannya melalui banyak titik (node) untuk menyembunyikan alamat IP asli pengguna.
+        </p>
+
+        <p>
+            Bagian dari Deep Web: Dark web adalah bagian kecil dari deep web (internet yang tidak diindeks publik) yang memang sengaja disembunyikan.
+        </p>
+
+        <p>
+            Isi dan Risiko di Dark WebAktivitas Ilegal: Sering digunakan sebagai tempat transaksi barang terlarang, data curian (seperti kartu kredit), senjata, hingga peretasan.Privasi dan Keamanan: Juga dipakai oleh jurnalis, aktivis, atau warga di negara dengan sensor ketat untuk berkomunikasi secara aman tanpa terlacak.Risiko Keamanan: Berisiko tinggi terhadap infeksi malware, penipuan (scam), atau pencurian data pribadi bagi pengguna yang sembarangan mengunjunginya.
+        </p>
+
+    </div>
+
+</section\>
+    <a href="https://watchpeopledie.tv/home" class="cyber-button">
+    Web Shock Site/GORE Untuk Usia 18+
+      
+</a>
+
+
+<footer>
+
+    Dark//Web
+    <br><br>
+    DIGITAL SYSTEM INTERFACE • LOCAL ENVIRONMENT
+
+</footer>
+
+
+<script>
+
+/* =====================
+   MATRIX
+===================== */
+
+const canvas =
+    document.getElementById("matrix");
+
+const ctx =
+    canvas.getContext("2d");
+
+const characters =
+    "01ABCDEFGHIJKLMNOPQRSTUVWXYZ#$%&@<>";
+
+let fontSize = 14;
+
+let columns = 0;
+
+let drops = [];
+
+function resize(){
+
+    canvas.width =
+        window.innerWidth;
+
+    canvas.height =
+        window.innerHeight;
+
+    columns =
+        Math.max(
+            1,
+            Math.floor(
+                canvas.width / fontSize
+            )
+        );
+
+    drops =
+        new Array(columns).fill(1);
+}
+
+function matrix(){
+
+    ctx.fillStyle =
+        "rgba(0,0,0,0.06)";
+
+    ctx.fillRect(
+        0,
+        0,
+        canvas.width,
+        canvas.height
+    );
+
+    ctx.fillStyle =
+        "#ff0033";
+
+    ctx.font =
+        fontSize + "px monospace";
+
+    for(
+        let i = 0;
+        i < drops.length;
+        i++
+    ){
+
+        const char =
+            characters[
+                Math.floor(
+                    Math.random() *
+                    characters.length
+                )
+            ];
+
+        ctx.fillText(
+            char,
+            i * fontSize,
+            drops[i] * fontSize
+        );
+
+        if(
+            drops[i] * fontSize >
+            canvas.height &&
+            Math.random() > .975
+        ){
+
+            drops[i] = 0;
+
+        }
+
+        drops[i]++;
+
+    }
+
+}
+
+resize();
+
+window.addEventListener(
+    "resize",
+    resize
+);
+
+setInterval(
+    matrix,
+    50
+);
+
+
+/* =====================
+   DIGITAL CLOCK
+===================== */
+
+function updateTime(){
+
+    const now =
+        new Date();
+
+    const time =
+        now.toLocaleTimeString();
+
+    const status =
+        document.querySelector(
+            "nav span"
+        );
+
+    if(status){
+
+        status.textContent =
+            "SYSTEM ONLINE ● " +
+            time;
+
+    }
+
+}
+
+updateTime();
+
+setInterval(
+    updateTime,
+    1000
+);
+
+
+/* =====================
+   RANDOM GLITCH
+===================== */
+
+const logo =
+    document.querySelector(".logo");
+
+setInterval(
+    function(){
+
+        if(
+            Math.random() > .8
+        ){
+
+            logo.style.transform =
+                "translate(" +
+                (Math.random()*4-2) +
+                "px)";
+
+            setTimeout(
+                function(){
+
+                    logo.style.transform =
+                        "";
+
+                },
+                100
+            );
+
+        }
+
+    },
+    1200
+);
+
+
+/* =====================
+   DIGITAL INFO
+===================== */
+
+function toggleInfo(){
+
+    const info =
+        document.getElementById(
+            "digitalInfo"
+        );
+
+    info.classList.toggle(
+        "active"
+    );
+
+}
+
+</script>
+<!-- =========================
+     EXTRA CYBER FEATURES
+========================= -->
+
+<style>
+
+.extra-cyber{
+    width:min(1100px,90%);
+    margin:auto;
+    padding:60px 0;
+}
+
+.extra-title{
+    border-left:3px solid #ff0033;
+    padding-left:12px;
+    margin-bottom:25px;
+    color:#ff0033;
+    text-shadow:0 0 10px #ff0033;
+}
+
+.extra-box{
+    background:rgba(10,0,0,.85);
+    border:1px solid rgba(255,0,51,.3);
+    padding:20px;
+    margin-bottom:25px;
+}
+
+.extra-terminal{
+    min-height:180px;
+    background:#020101;
+    padding:15px;
+    margin-bottom:15px;
+    border:1px solid rgba(255,0,51,.2);
+    color:#ff0033;
+    font-size:12px;
+    line-height:2;
+    overflow:auto;
+}
+
+.extra-input{
+    width:100%;
+    padding:12px;
+    background:#050000;
+    border:1px solid #ff0033;
+    color:#ff0033;
+    outline:none;
+    font-family:monospace;
+}
+
+.extra-button{
+    padding:12px 18px;
+    margin:5px 3px;
+    background:#080000;
+    border:1px solid #ff0033;
+    color:#ff0033;
+    font-family:monospace;
+    cursor:pointer;
+}
+
+.extra-button:hover{
+    background:#ff0033;
+    color:#000;
+    box-shadow:0 0 20px #ff0033;
+}
+
+.monitor-grid{
+    display:grid;
+    grid-template-columns:
+        repeat(3,1fr);
+    gap:10px;
+}
+
+.monitor-card{
+    border:1px solid rgba(255,0,51,.25);
+    padding:18px;
+    text-align:center;
+}
+
+.monitor-value{
+    font-size:25px;
+    margin-top:10px;
+    text-shadow:0 0 10px #ff0033;
+}
+
+.scan-result{
+    margin-top:15px;
+    min-height:30px;
+    color:#ff0033;
+}
+
+@media(max-width:600px){
+
+    .monitor-grid{
+        grid-template-columns:1fr;
+    }
+
+}
+
+</style>
+
+
+<section class="extra-cyber">
+
+    <!-- INTERACTIVE TERMINAL -->
+
+    <div class="extra-title">
+        // INTERACTIVE TERMINAL
+    </div>
+
+    <div class="extra-box">
+
+        <div
+            id="extraTerminal"
+            class="extra-terminal"
+        >
+            root@cyber:~$ system ready<br>
+            Type <b>help</b> to see commands.
+        </div>
+
+        <input
+            id="terminalInput"
+            class="extra-input"
+            type="text"
+            placeholder="Type command..."
+            onkeydown="terminalCommand(event)"
+        >
+
+    </div>
+
+
+    <!-- SECURITY SCAN -->
+
+    <div class="extra-title">
+        // SECURITY SCAN SIMULATOR
+    </div>
+
+    <div class="extra-box">
+
+        <button
+            class="extra-button"
+            onclick="startScan()"
+        >
+            START SECURITY SCAN
+        </button>
+
+        <div
+            id="scanResult"
+            class="scan-result"
+        >
+            SYSTEM READY.
+        </div>
+
+    </div>
+
+
+    <!-- LIVE MONITOR -->
+
+    <div class="extra-title">
+        // LIVE SYSTEM MONITOR
+    </div>
+
+    <div class="extra-box">
+
+        <div class="monitor-grid">
+
+            <div class="monitor-card">
+                CPU
+                <div
+                    id="cpuValue"
+                    class="monitor-value"
+                >
+                    78%
+                </div>
+            </div>
+
+            <div class="monitor-card">
+                MEMORY
+                <div
+                    id="ramValue"
+                    class="monitor-value"
+                >
+                    64%
+                </div>
+            </div>
+
+            <div class="monitor-card">
+                NETWORK
+                <div
+                    id="netValue"
+                    class="monitor-value"
+                >
+                    91%
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</section>
+
+
+<script>
+
+/* =========================
+   INTERACTIVE TERMINAL
+========================= */
+
+function terminalCommand(event){
+
+    if(event.key !== "Enter"){
+        return;
+    }
+
+    const input =
+        document.getElementById(
+            "terminalInput"
+        );
+
+    const terminal =
+        document.getElementById(
+            "extraTerminal"
+        );
+
+    const command =
+        input.value
+        .trim()
+        .toLowerCase();
+
+    if(command === ""){
+        return;
+    }
+
+    terminal.innerHTML +=
+        "<br>root@cyber:~$ " +
+        command;
+
+    if(command === "help"){
+
+        terminal.innerHTML +=
+            "<br>Available commands:" +
+            "<br>• help" +
+            "<br>• status" +
+            "<br>• about" +
+            "<br>• time" +
+            "<br>• clear";
+
+    }
+
+    else if(command === "status"){
+
+        terminal.innerHTML +=
+            "<br>[ OK ] NETWORK" +
+            "<br>[ OK ] SECURITY" +
+            "<br>[ OK ] DATABASE" +
+            "<br>[ OK ] CORE";
+
+    }
+
+    else if(command === "about"){
+
+        terminal.innerHTML +=
+            "<br>CYBER//CORE" +
+            "<br>Digital system interface." +
+            "<br>Simulation environment.";
+
+    }
+
+    else if(command === "time"){
+
+        terminal.innerHTML +=
+            "<br>" +
+            new Date().toLocaleString();
+
+    }
+
+    else if(command === "clear"){
+
+        terminal.innerHTML =
+            "root@cyber:~$ terminal cleared.";
+
+    }
+
+    else{
+
+        terminal.innerHTML +=
+            "<br>Command not found." +
+            "<br>Type 'help'.";
+
+    }
+
+    terminal.scrollTop =
+        terminal.scrollHeight;
+
+    input.value = "";
+
+}
+
+
+/* =========================
+   SECURITY SCAN
+========================= */
+
+function startScan(){
+
+    const result =
+        document.getElementById(
+            "scanResult"
+        );
+
+    let progress = 0;
+
+    result.innerHTML =
+        "INITIALIZING SCAN...";
+
+    const scan =
+        setInterval(function(){
+
+            progress += 10;
+
+            result.innerHTML =
+                "SCANNING SYSTEM... " +
+                progress +
+                "%";
+
+            if(progress >= 100){
+
+                clearInterval(scan);
+
+                result.innerHTML =
+                    "✓ SCAN COMPLETE — " +
+                    "NO SIMULATED THREATS FOUND.";
+
+            }
+
+        },250);
+
+}
+
+
+/* =========================
+   LIVE SYSTEM MONITOR
+========================= */
+
+function randomValue(min,max){
+
+    return Math.floor(
+        Math.random() *
+        (max - min + 1)
+    ) + min;
+
+}
+
+function updateMonitor(){
+
+    document.getElementById(
+        "cpuValue"
+    ).textContent =
+        randomValue(65,95) + "%";
+
+    document.getElementById(
+        "ramValue"
+    ).textContent =
+        randomValue(45,80) + "%";
+
+    document.getElementById(
+        "netValue"
+    ).textContent =
+        randomValue(70,100) + "%";
+
+}
+
+setInterval(
+    updateMonitor,
+    1500
+);
+
+}
+
+</script>
+  <section class="extra-cyber">
+
+    <div class="extra-title">
+        // SHOCK ARCHIVE
+    </div>
+
+    <div class="extra-box">
+
+        <h3 style="margin-bottom:15px;">
+            INCIDENT ARCHIVE
+        </h3>
+
+        <p style="opacity:.6; line-height:1.8;">
+            Arsip simulasi mengenai kejadian misterius,
+            kecelakaan, dan fenomena ekstrem.
+            Semua kasus di bawah ini bersifat nyata
+            dan tidak menampilkan konten grafis.
+        </p>
+
+        <br>
+
+        <div style="border:1px solid rgba(255,0,51,.25); padding:15px; margin:10px 0;">
+            <b>CASE 001 — OGRISH.COM</b>
+            <br><br>
+            ACTIVE: 2000–2006
+CLASSIFICATION: SHOCK MEDIA ARCHIVE
+STATUS: CLOSED / REBRANDED
+Ogrish.com merupakan situs internet yang dikenal karena mengarsipkan dan menyebarkan rekaman kejadian nyata yang sangat mengganggu, termasuk materi dari konflik dan tindak kriminal.
+Salah satu kontroversi paling terkenal terjadi pada 2002, ketika rekaman eksekusi jurnalis Daniel Pearl beredar melalui internet dan dikaitkan dengan Ogrish. Peristiwa tersebut memicu perhatian serta tekanan dari pihak berwenang.
+Namun, Ogrish tidak ditutup secara khusus karena rekaman tersebut. Pada 31 Oktober 2006, situs tersebut berakhir dan kemudian berkembang menjadi LiveLeak, dengan fokus yang lebih besar pada video berita dan citizen journalism.
+ARCHIVE: OGRISH.COM
+KNOWN FOR: SHOCKING REAL-WORLD FOOTAGE
+FINAL STATUS: REBRANDED → LIVELEAK
+CASE TYPE: INTERNET HISTORY
+        </div>
+
+        <div style="border:1px solid rgba(255,0,51,.25); padding:15px; margin:10px 0;">
+            <b>CASE 002 — LOL SUPERMAN</b>
+            <br><br>
+Tahun: 2001
+Lokasi: New York City, Amerika Serikat
+Status: REAL INCIDENT / ARCHIVAL MYSTERY
+“LOL Superman” adalah nama yang kemudian dikaitkan dengan sebuah rekaman yang diduga berkaitan dengan peristiwa 11 September 2001. Rekaman tersebut menjadi bagian dari diskusi internet karena keberadaan, asal-usul, dan konteksnya diperdebatkan selama bertahun-tahun.
+Berbagai versi dan klaim mengenai rekaman tersebut beredar di internet, sehingga penting membedakan fakta yang terdokumentasi dari spekulasi komunitas internet.
+CLASSIFICATION: HISTORICAL / ARCHIVAL
+AUTHENTICITY & CONTEXT: DEBATED
+        </div>
+
+        <button
+            class="extra-button"
+            onclick="showArchiveWarning()">
+            OPEN ARCHIVE
+        </button>
+
+        <div
+            id="archiveWarning"
+            style="display:none; margin-top:15px;">
+            ⚠ SHOCK ARCHIVE<br>
+            Tidak ada konten gore nyata yang
+            ditampilkan dalam situs ini.
+        </div>
+
+    </div>
+
+</section>
+
+<script>
+
+function showArchiveWarning(){
+
+    const warning =
+        document.getElementById(
+            "archiveWarning"
+        );
+
+    warning.style.display =
+        warning.style.display === "none"
+        ? "block"
+        : "none";
+}
+
+</script>
+  <!-- =========================================================
+     CYBER ARCHIVE // 5 EXTRA FEATURES
+     ARCHIVE SEARCH
+     TIMELINE
+     WORLD MAP SIMULATION
+     SIGNAL INTERCEPT
+     INVESTIGATION LOG
+========================================================= -->
+
+<style>
+/* =========================
+   ARCHIVE SEARCH
+========================= */
+
+.archive-extra{
+    width:100%;
+    max-width:1100px;
+    margin:40px auto;
+    padding:0 15px;
+}
+
+.archive-box{
+    background:#080202;
+    border:1px solid #ff0033;
+    box-shadow:0 0 15px rgba(255,0,51,.15);
+    padding:20px;
+    margin-bottom:25px;
+}
+
+.archive-title{
+    color:#ff0033;
+    font-weight:bold;
+    letter-spacing:2px;
+    margin-bottom:15px;
+}
+
+.archive-search{
+    display:flex;
+    gap:10px;
+}
+
+.archive-search input{
+    flex:1;
+    background:#030000;
+    border:1px solid #a80022;
+    color:#ff0033;
+    padding:12px;
+    outline:none;
+    font-family:monospace;
+}
+
+.archive-search button,
+.signal-button{
+    background:#ff0033;
+    color:#050000;
+    border:none;
+    padding:12px 18px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.archive-search button:hover,
+.signal-button:hover{
+    background:#ff3355;
+}
+
+.search-results{
+    margin-top:15px;
+    color:#aaa;
+    line-height:1.7;
+}
+
+.search-item{
+    border-left:3px solid #ff0033;
+    padding:10px;
+    margin:8px 0;
+    background:#100404;
+}
+
+.search-item strong{
+    color:#ff0033;
+}
+
+
+/* =========================
+   TIMELINE
+========================= */
+
+.timeline{
+    position:relative;
+    margin-top:20px;
+    padding-left:25px;
+}
+
+.timeline::before{
+    content:"";
+    position:absolute;
+    left:5px;
+    top:0;
+    bottom:0;
+    width:2px;
+    background:#ff0033;
+}
+
+.timeline-item{
+    position:relative;
+    margin-bottom:25px;
+    padding-left:20px;
+}
+
+.timeline-item::before{
+    content:"";
+    position:absolute;
+    left:-25px;
+    top:5px;
+    width:12px;
+    height:12px;
+    background:#ff0033;
+    border-radius:50%;
+    box-shadow:0 0 10px #ff0033;
+}
+
+.timeline-year{
+    color:#ff0033;
+    font-weight:bold;
+}
+
+.timeline-text{
+    color:#aaa;
+    margin-top:5px;
+}
+
+
+/* =========================
+   WORLD MAP SIMULATION
+========================= */
+
+.map-container{
+    position:relative;
+    width:100%;
+    height:350px;
+    overflow:hidden;
+    background:
+        linear-gradient(rgba(255,0,51,.08) 1px,transparent 1px),
+        linear-gradient(90deg,rgba(255,0,51,.08) 1px,transparent 1px);
+    background-size:35px 35px;
+    border:1px solid #a80022;
+}
+
+.map-lines{
+    position:absolute;
+    inset:0;
+    opacity:.4;
+}
+
+.map-point{
+    position:absolute;
+    width:13px;
+    height:13px;
+    background:#ff0033;
+    border-radius:50%;
+    box-shadow:0 0 15px #ff0033;
+    cursor:pointer;
+}
+
+.map-point::after{
+    content:"";
+    position:absolute;
+    width:25px;
+    height:25px;
+    left:-6px;
+    top:-6px;
+    border:1px solid #ff0033;
+    border-radius:50%;
+    animation:pulse 1.5s infinite;
+}
+
+.map-label{
+    position:absolute;
+    background:#090000;
+    border:1px solid #ff0033;
+    color:#ff0033;
+    padding:5px 8px;
+    font-size:11px;
+    display:none;
+    white-space:nowrap;
+    z-index:5;
+}
+
+.map-point:hover + .map-label{
+    display:block;
+}
+
+@keyframes pulse{
+    0%{transform:scale(.6);opacity:1}
+    100%{transform:scale(1.7);opacity:0}
+}
+
+.map-info{
+    margin-top:12px;
+    color:#777;
+    font-size:12px;
+}
+
+
+/* =========================
+   SIGNAL INTERCEPT
+========================= */
+
+.signal-screen{
+    background:#020000;
+    border:1px solid #ff0033;
+    padding:18px;
+    min-height:180px;
+    color:#ff0033;
+    font-family:monospace;
+    white-space:pre-wrap;
+    overflow:hidden;
+    line-height:1.6;
+}
+
+.signal-status{
+    color:#777;
+    margin-bottom:10px;
+}
+
+
+/* =========================
+   INVESTIGATION LOG
+========================= */
+
+.log-screen{
+    background:#020000;
+    border:1px solid #a80022;
+    padding:15px;
+    height:220px;
+    overflow-y:auto;
+    font-family:monospace;
+    font-size:13px;
+    line-height:1.7;
+}
+
+.log-line{
+    color:#999;
+}
+
+.log-time{
+    color:#ff0033;
+}
+
+.log-ok{
+    color:#ff0033;
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media(max-width:600px){
+
+    .archive-search{
+        flex-direction:column;
+    }
+
+    .archive-search button{
+        width:100%;
+    }
+
+    .map-container{
+        height:280px;
+    }
+
+}
+</style>
+
+
+<div class="archive-extra">
+
+    <!-- =========================
+         2. ARCHIVE SEARCH
+    ========================== -->
+
+    <section class="archive-box">
+
+        <div class="archive-title">
+            // ARCHIVE SEARCH
+        </div>
+
+        <div class="archive-search">
+
+            <input
+                type="text"
+                id="archiveSearch"
+                placeholder="Search archive..."
+                onkeydown="if(event.key==='Enter') searchArchive()"
+            >
+
+            <button onclick="searchArchive()">
+                SEARCH
+            </button>
+
+        </div>
+
+        <div id="searchResults" class="search-results">
+            Type a keyword to search the archive.
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         3. TIMELINE
+    ========================== -->
+
+    <section class="archive-box">
+
+        <div class="archive-title">
+            // ARCHIVE TIMELINE
+        </div>
+
+        <div class="timeline">
+
+            <div class="timeline-item">
+                <div class="timeline-year">1987</div>
+                <div class="timeline-text">
+                    Max Headroom broadcast intrusion becomes one
+                    of the most unusual unsolved television incidents.
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-year">2000</div>
+                <div class="timeline-text">
+                    Ogrish.com becomes known for controversial
+                    shock-media archives on the early internet.
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-year">2002</div>
+                <div class="timeline-text">
+                    Online distribution of controversial real-world
+                    footage brings increased attention to shock sites.
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-year">2006</div>
+                <div class="timeline-text">
+                    Ogrish is rebranded as LiveLeak and shifts toward
+                    citizen journalism and news footage.
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-year">2021</div>
+                <div class="timeline-text">
+                    LiveLeak officially shuts down after years of
+                    hosting user-submitted news and event footage.
+                </div>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         4. WORLD MAP SIMULATION
+    ========================== -->
+
+    <section class="archive-box">
+
+        <div class="archive-title">
+            // WORLD MAP SIMULATION
+        </div>
+
+        <div class="map-container">
+
+            <svg class="map-lines"
+                 viewBox="0 0 1000 500"
+                 preserveAspectRatio="none">
+
+                <path
+                    d="M100 180
+                       C180 100,260 130,330 180
+                       S500 230,590 150
+                       S760 100,900 180
+                       M80 300
+                       C200 250,300 350,420 290
+                       S650 250,900 320"
+                    fill="none"
+                    stroke="#ff0033"
+                    stroke-width="1"
+                />
+
+            </svg>
+
+
+            <!-- CHICAGO -->
+
+            <div
+                class="map-point"
+                style="left:24%;top:32%;"
+                onclick="mapMessage('CHICAGO, USA — MAX HEADROOM INCIDENT')">
+            </div>
+
+            <div
+                class="map-label"
+                style="left:26%;top:35%;">
+                CHICAGO // CASE 002
+            </div>
+
+
+            <!-- NEW YORK -->
+
+            <div
+                class="map-point"
+                style="left:30%;top:39%;"
+                onclick="mapMessage('NEW YORK, USA — ARCHIVAL REFERENCE')">
+            </div>
+
+            <div
+                class="map-label"
+                style="left:32%;top:42%;">
+                NEW YORK
+            </div>
+
+
+            <!-- EUROPE -->
+
+            <div
+                class="map-point"
+                style="left:50%;top:28%;"
+                onclick="mapMessage('EUROPE — INTERNET HISTORY ARCHIVE')">
+            </div>
+
+            <div
+                class="map-label"
+                style="left:52%;top:31%;">
+                EUROPE
+            </div>
+
+
+            <!-- ASIA -->
+
+            <div
+                class="map-point"
+                style="left:72%;top:43%;"
+                onclick="mapMessage('ASIA — ARCHIVE NODE')">
+            </div>
+
+            <div
+                class="map-label"
+                style="left:74%;top:46%;">
+                ASIA
+            </div>
+
+        </div>
+
+        <div id="mapInfo" class="map-info">
+            Select a red point to inspect the simulated archive node.
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         5. SIGNAL INTERCEPT
+    ========================== -->
+
+    <section class="archive-box">
+
+        <div class="archive-title">
+            // SIGNAL INTERCEPT
+        </div>
+
+        <div class="signal-status">
+            STATUS: <span id="signalStatus">STANDBY</span>
+        </div>
+
+        <div id="signalScreen" class="signal-screen">
+[ SYSTEM READY ]
+
+Waiting for incoming signal...
+
+> CHANNEL: ARCHIVE-07
+> ENCRYPTION: UNKNOWN
+> STATUS: STANDBY
+        </div>
+
+        <br>
+
+        <button
+            class="signal-button"
+            onclick="startSignal()">
+            INTERCEPT SIGNAL
+        </button>
+
+    </section>
+
+
+    <!-- =========================
+         7. INVESTIGATION LOG
+    ========================== -->
+
+    <section class="archive-box">
+
+        <div class="archive-title">
+            // INVESTIGATION LOG
+        </div>
+
+        <div id="investigationLog" class="log-screen">
+
+            <div class="log-line">
+                <span class="log-time">[SYSTEM]</span>
+                Archive interface initialized.
+            </div>
+
+            <div class="log-line">
+                <span class="log-time">[SYSTEM]</span>
+                Waiting for investigation...
+            </div>
+
+        </div>
+
+    </section>
+
+</div>
+
+
+<script>
+
+/* =========================================================
+   ARCHIVE DATABASE
+========================================================= */
+
+const archiveDatabase = [
+
+    {
+        title:"OGRISH.COM",
+        keywords:["ogrish","shock","archive","internet"],
+        description:
+        "Historical shock-media website active during the early internet era."
+    },
+
+    {
+        title:"MAX HEADROOM INCIDENT",
+        keywords:["max","headroom","chicago","broadcast","1987"],
+        description:
+        "A documented television broadcast intrusion in Chicago in 1987."
+    },
+
+    {
+        title:"SURFACE WEB",
+        keywords:["surface","web","google","search"],
+        description:
+        "The publicly indexed portion of the internet accessible through ordinary search engines."
+    },
+
+    {
+        title:"DEEP WEB",
+        keywords:["deep","web","database","private"],
+        description:
+        "Internet content that is not normally indexed by public search engines."
+    },
+
+    {
+        title:"CYBER SECURITY",
+        keywords:["cyber","security","protection","network"],
+        description:
+        "Methods used to protect devices, networks and digital information."
+    },
+
+    {
+        title:"DIGITAL PRIVACY",
+        keywords:["privacy","data","personal","security"],
+        description:
+        "Protection of personal information and digital activity."
+    }
+
+];
+
+
+/* =========================================================
+   2. ARCHIVE SEARCH
+========================================================= */
+
+function searchArchive(){
+
+    const input =
+        document.getElementById("archiveSearch");
+
+    const results =
+        document.getElementById("searchResults");
+
+    const query =
+        input.value.toLowerCase().trim();
+
+
+    if(query === ""){
+
+        results.innerHTML =
+            "Enter a keyword first.";
+
+        return;
+    }
+
+
+    const found =
+        archiveDatabase.filter(item =>
+
+            item.title.toLowerCase().includes(query) ||
+
+            item.keywords.some(keyword =>
+                keyword.includes(query)
+            )
+
+        );
+
+
+    if(found.length === 0){
+
+        results.innerHTML =
+            "<div class='search-item'>" +
+            "<strong>NO RESULT</strong><br>" +
+            "No matching archive was found." +
+            "</div>";
+
+        addLog("Archive search returned no results.");
+
+        return;
+    }
+
+
+    results.innerHTML =
+        found.map(item =>
+
+            "<div class='search-item'>" +
+
+            "<strong>" +
+            item.title +
+            "</strong><br>" +
+
+            item.description +
+
+            "</div>"
+
+        ).join("");
+
+
+    addLog(
+        "Archive search completed: " +
+        found.length +
+        " result(s) found."
+    );
+
+}
+
+
+/* =========================================================
+   4. WORLD MAP
+========================================================= */
+
+function mapMessage(message){
+
+    document.getElementById("mapInfo").innerText =
+        "NODE SELECTED → " + message;
+
+    addLog(
+        "Map node selected: " + message
+    );
+
+}
+
+
+/* =========================================================
+   5. SIGNAL INTERCEPT
+========================================================= */
+
+let signalRunning = false;
+
+
+function startSignal(){
+
+    if(signalRunning) return;
+
+    signalRunning = true;
+
+
+    const screen =
+        document.getElementById("signalScreen");
+
+    const status =
+        document.getElementById("signalStatus");
+
+
+    status.innerText = "INTERCEPTING";
+
+
+    screen.innerText =
+`[ SIGNAL DETECTED ]
+
+> CHANNEL: ARCHIVE-07
+> SOURCE: UNKNOWN
+> ENCRYPTION: ACTIVE
+
+Connecting...
+`;
+
+
+    addLog("Unknown signal detected.");
+
+    setTimeout(() => {
+
+        screen.innerText +=
+`
+[ 25% ] Establishing connection...
+`;
+
+    },700);
+
+
+    setTimeout(() => {
+
+        screen.innerText +=
+`
+[ 50% ] Decoding signal...
+`;
+
+    },1400);
+
+
+    setTimeout(() => {
+
+        screen.innerText +=
+`
+[ 75% ] Verifying archive packet...
+`;
+
+    },2100);
+
+
+    setTimeout(() => {
+
+        screen.innerText +=
+`
+[ 100% ] SIGNAL DECODED
+
+--------------------------------
+
+MESSAGE:
+
+"ARCHIVE NODE ACTIVE"
+
+"DATA CLASSIFICATION:
+ SIMULATION"
+
+"NO EXTERNAL CONNECTION
+ REQUIRED."
+
+--------------------------------
+
+[ END OF SIGNAL ]`;
+
+        status.innerText = "COMPLETE";
+
+        addLog(
+            "Signal decoded successfully."
+        );
+
+        signalRunning = false;
+
+    },3000);
+
+}
+
+
+/* =========================================================
+   7. INVESTIGATION LOG
+========================================================= */
+
+function addLog(message){
+
+    const log =
+        document.getElementById(
+            "investigationLog"
+        );
+
+
+    const now =
+        new Date();
+
+
+    const time =
+        now.toLocaleTimeString();
+
+
+    const line =
+        document.createElement("div");
+
+
+    line.className = "log-line";
+
+
+    line.innerHTML =
+        "<span class='log-time'>" +
+        "[" + time + "]" +
+        "</span> " +
+        message;
+
+
+    log.appendChild(line);
+
+
+    log.scrollTop =
+        log.scrollHeight;
+
+}
+
+
+/* =========================================================
+   AUTOMATIC SYSTEM LOG
+========================================================= */
+
+const automaticLogs = [
+
+    "Scanning archive index...",
+
+    "Checking database integrity...",
+
+    "Archive metadata verified.",
+
+    "Monitoring signal channels...",
+
+    "No external connection required.",
+
+    "Investigation interface ready."
+
+];
+
+
+let logIndex = 0;
+
+
+setInterval(() => {
+
+    if(logIndex < automaticLogs.length){
+
+        addLog(
+            automaticLogs[logIndex]
+        );
+
+        logIndex++;
+
+    }
+
+},5000);
+
+</script>
+        
+
+<!-- =========================================================
+     NEW CYBER FEATURES
+     1. SYSTEM BOOT ANIMATION
+     3. VIRTUAL FILE EXPLORER
+     6. EVIDENCE BOARD
+     No additional Matrix canvas.
+========================================================= -->
+
+<style>
+/* =========================
+   SYSTEM BOOT
+========================= */
+.boot-overlay{
+    position:fixed;
+    inset:0;
+    z-index:9999;
+    background:#040202;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:25px;
+    transition:opacity .5s ease, visibility .5s ease;
+}
+.boot-overlay.hidden{
+    opacity:0;
+    visibility:hidden;
+    pointer-events:none;
+}
+.boot-box{
+    width:min(700px,100%);
+    border:1px solid #ff0033;
+    background:#070101;
+    padding:25px;
+    box-shadow:0 0 30px rgba(255,0,51,.2);
+    font-family:monospace;
+}
+.boot-title{
+    font-size:20px;
+    margin-bottom:18px;
+    text-shadow:0 0 10px #ff0033;
+}
+.boot-log{
+    height:220px;
+    overflow:hidden;
+    color:#ff0033;
+    font-size:12px;
+    line-height:1.9;
+}
+.boot-progress{
+    height:5px;
+    background:#22050b;
+    margin-top:15px;
+}
+.boot-progress div{
+    width:0;
+    height:100%;
+    background:#ff0033;
+    box-shadow:0 0 10px #ff0033;
+    transition:width .2s linear;
+}
+
+/* =========================
+   FILE EXPLORER
+========================= */
+.file-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:10px;
+    margin-top:15px;
+}
+.file-item{
+    border:1px solid rgba(255,0,51,.3);
+    background:#050000;
+    padding:16px;
+    cursor:pointer;
+    transition:.2s;
+}
+.file-item:hover{
+    border-color:#ff0033;
+    box-shadow:0 0 15px rgba(255,0,51,.18);
+    transform:translateY(-2px);
+}
+.file-icon{
+    font-size:25px;
+    margin-bottom:8px;
+}
+.file-name{
+    color:#ff0033;
+    font-weight:bold;
+    font-size:12px;
+}
+.file-meta{
+    color:#777;
+    font-size:10px;
+    margin-top:6px;
+}
+.file-viewer{
+    display:none;
+    margin-top:15px;
+    border:1px solid #a80022;
+    padding:18px;
+    background:#020000;
+    line-height:1.8;
+    font-size:12px;
+}
+.file-viewer.active{
+    display:block;
+}
+
+/* =========================
+   EVIDENCE BOARD
+========================= */
+.evidence-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:12px;
+    margin-top:15px;
+}
+.evidence-card{
+    border:1px solid rgba(255,0,51,.3);
+    background:#060000;
+    padding:18px;
+    cursor:pointer;
+    transition:.2s;
+}
+.evidence-card:hover{
+    border-color:#ff0033;
+    box-shadow:0 0 18px rgba(255,0,51,.15);
+}
+.evidence-tag{
+    display:inline-block;
+    border:1px solid #ff0033;
+    padding:3px 7px;
+    font-size:9px;
+    margin-bottom:10px;
+}
+.evidence-card h3{
+    font-size:13px;
+    margin-bottom:8px;
+}
+.evidence-card p{
+    color:#777;
+    font-size:11px;
+    line-height:1.7;
+}
+.evidence-detail{
+    display:none;
+    margin-top:12px;
+    padding-top:12px;
+    border-top:1px solid rgba(255,0,51,.2);
+    color:#aaa;
+    font-size:11px;
+    line-height:1.7;
+}
+.evidence-card.open .evidence-detail{
+    display:block;
+}
+
+@media(max-width:600px){
+    .file-grid,
+    .evidence-grid{
+        grid-template-columns:1fr;
+    }
+}
+</style>
+
+<!-- SYSTEM BOOT -->
+<div id="cyberBoot" class="boot-overlay">
+    <div class="boot-box">
+        <div class="boot-title">CYBER // SYSTEM BOOT</div>
+        <div id="bootLog" class="boot-log"></div>
+        <div class="boot-progress">
+            <div id="bootProgress"></div>
+        </div>
+    </div>
+</div>
+
+<section class="extra-cyber">
+
+    <!-- VIRTUAL FILE EXPLORER -->
+    <div class="extra-title">
+        // VIRTUAL FILE EXPLORER
+    </div>
+
+    <div class="extra-box">
+        <p style="opacity:.55;line-height:1.8;">
+            Simulated local archive directory. Semua file di bawah
+            hanyalah data demonstrasi dan tidak membuka file eksternal.
+        </p>
+
+        <div class="file-grid">
+
+            <div class="file-item" onclick="openCyberFile('case')">
+                <div class="file-icon">📁</div>
+                <div class="file-name">CASE_FILES</div>
+                <div class="file-meta">DIRECTORY • 3 ITEMS</div>
+            </div>
+
+            <div class="file-item" onclick="openCyberFile('system')">
+                <div class="file-icon">⚙️</div>
+                <div class="file-name">SYSTEM.LOG</div>
+                <div class="file-meta">LOG • 12 KB</div>
+            </div>
+
+            <div class="file-item" onclick="openCyberFile('readme')">
+                <div class="file-icon">📄</div>
+                <div class="file-name">README.TXT</div>
+                <div class="file-meta">TEXT • 4 KB</div>
+            </div>
+
+        </div>
+
+        <div id="cyberFileViewer" class="file-viewer"></div>
+    </div>
+
+
+    <!-- EVIDENCE BOARD -->
+    <div class="extra-title">
+        // EVIDENCE BOARD
+    </div>
+
+    <div class="extra-box">
+        <p style="opacity:.55;line-height:1.8;">
+            Papan bukti simulasi untuk menghubungkan informasi
+            dari arsip dan catatan investigasi.
+        </p>
+
+        <div class="evidence-grid">
+
+            <div class="evidence-card" onclick="toggleEvidence(this)">
+                <span class="evidence-tag">EVIDENCE 01</span>
+                <h3>BROADCAST RECORD</h3>
+                <p>Catatan mengenai gangguan siaran televisi.</p>
+                <div class="evidence-detail">
+                    Referensi simulasi: Max Headroom Incident,
+                    Chicago, 1987. Status: documented historical event.
+                </div>
+            </div>
+
+            <div class="evidence-card" onclick="toggleEvidence(this)">
+                <span class="evidence-tag">EVIDENCE 02</span>
+                <h3>ARCHIVE RECORD</h3>
+                <p>Metadata mengenai sejarah shock-media online.</p>
+                <div class="evidence-detail">
+                    Referensi simulasi: Ogrish.com dan transisinya
+                    menuju LiveLeak. Status: historical archive.
+                </div>
+            </div>
+
+            <div class="evidence-card" onclick="toggleEvidence(this)">
+                <span class="evidence-tag">EVIDENCE 03</span>
+                <h3>NETWORK TRACE</h3>
+                <p>Jejak jaringan virtual dari sistem simulasi.</p>
+                <div class="evidence-detail">
+                    NODE: ARCHIVE-07<br>
+                    CONNECTION: SIMULATED<br>
+                    EXTERNAL ACCESS: NONE
+                </div>
+            </div>
+
+            <div class="evidence-card" onclick="toggleEvidence(this)">
+                <span class="evidence-tag">EVIDENCE 04</span>
+                <h3>STATUS REPORT</h3>
+                <p>Ringkasan kondisi sistem saat ini.</p>
+                <div class="evidence-detail">
+                    DATABASE: ONLINE<br>
+                    SECURITY: ACTIVE<br>
+                    ARCHIVE: READY<br>
+                    MODE: SIMULATION ONLY
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</section>
+
+<script>
+/* =========================
+   SYSTEM BOOT ANIMATION
+========================= */
+(function(){
+    const boot = document.getElementById("cyberBoot");
+    const log = document.getElementById("bootLog");
+    const progress = document.getElementById("bootProgress");
+
+    const lines = [
+        "[ BOOT ] Initializing CYBER // SYSTEM...",
+        "[ OK ] Loading interface modules...",
+        "[ OK ] Checking archive database...",
+        "[ OK ] Security module online...",
+        "[ OK ] Virtual environment ready...",
+        "[ OK ] Investigation interface loaded...",
+        "[ DONE ] SYSTEM ONLINE"
+    ];
+
+    let index = 0;
+
+    function bootStep(){
+        if(index < lines.length){
+            log.innerHTML += lines[index] + "<br>";
+            progress.style.width =
+                Math.round(((index + 1) / lines.length) * 100) + "%";
+            index++;
+            setTimeout(bootStep, 260);
+        }else{
+            setTimeout(function(){
+                boot.classList.add("hidden");
+            }, 500);
+        }
+    }
+
+    bootStep();
+})();
+
+/* =========================
+   VIRTUAL FILE EXPLORER
+========================= */
+function openCyberFile(type){
+    const viewer = document.getElementById("cyberFileViewer");
+
+    const files = {
+        case:
+            "<b>CASE_FILES/</b><br><br>" +
+            "01_MAX_HEADROOM.case<br>" +
+            "02_OGRISH_ARCHIVE.case<br>" +
+            "03_ARCHIVE_NOTES.txt",
+
+        system:
+            "<b>SYSTEM.LOG</b><br><br>" +
+            "[OK] Core initialized<br>" +
+            "[OK] Archive connected<br>" +
+            "[OK] Security active<br>" +
+            "[OK] Simulation mode enabled",
+
+        readme:
+            "<b>README.TXT</b><br><br>" +
+            "CYBER // SYSTEM<br>" +
+            "Virtual archive interface.<br>" +
+            "All interactive data is simulated.<br>" +
+            "No external system is accessed."
+    };
+
+    viewer.innerHTML = files[type] || "FILE NOT FOUND";
+    viewer.classList.add("active");
+}
+
+/* =========================
+   EVIDENCE BOARD
+========================= */
+function toggleEvidence(card){
+    card.classList.toggle("open");
+}
+</script>
+
+</body>
+</html>
